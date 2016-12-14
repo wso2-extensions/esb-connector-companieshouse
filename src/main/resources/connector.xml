@@ -20,5 +20,6 @@
     <component name="companieshouse" package="org.wso2.carbon.connector">
         <dependency component="config"/>
         <dependency component="company"/>
+        <description>WSO2 Connector for Companies house</description>
     </component>
 </connector>
