@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- ~  Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ ~  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  ~
  ~  WSO2 Inc. licenses this file to you under the Apache License,
  ~  Version 2.0 (the "License"); you may not use this file except
@@ -24,25 +24,43 @@
         <property name="uri.var.searchTerm" expression="$func:searchTerm"/>
         <property name="uri.var.itemsPerPage" expression="$func:itemsPerPage"/>
         <property name="uri.var.startIndex" expression="$func:startIndex"/>
-        <script language="js"><![CDATA[
-            var map = [];
-            map['items_per_page']=mc.getProperty('uri.var.itemsPerPage');
-            map['start_index']=mc.getProperty('uri.var.startIndex');
-            var query="&";
-            for (var key in map) {
-                if(map[key]!="" && map[key]){
-                query += key+'='+map[key]+'&';
+        <script language="js">
+            <![CDATA[
+                //url param variables
+                var itemsPerPage = mc.getProperty("itemsPerPage");
+                var startIndex = mc.getProperty("startIndex");
+                //url param processing start
+                var urlParamString = '';
+                if (itemsPerPage != "" && itemsPerPage != null) {
+                    urlParamString += '&items_per_page=' + itemsPerPage;
                 }
-            }
-           mc.setProperty('uri.var.query', query);
-         ]]></script>
-        <property name="uri.var.queryParams" expression="get-property('uri.var.query')"/>
-        <property name="uri.var.endpoint" expression="fn:concat('https://',$ctx:uri.var.apiUrl,
-            '/search/companies?q=',$ctx:uri.var.searchTerm,$ctx:uri.var.queryParams)"/>
-        <call>
-            <endpoint>
-                <http method="GET" uri-template="{uri.var.endpoint}"/>
-            </endpoint>
-        </call>
+                if (startIndex != "" && startIndex != null) {
+                    urlParamString += '&start_index=' + startIndex;
+                }
+                if(urlParamString != '') {
+                    urlParamString = '&' + urlParamString.toString().substring(1);
+                }
+                mc.setProperty('uri.var.urlParamString', urlParamString);
+                //url param processing end
+           ]]>
+        </script>
+        <filter source="$ctx:companieshouseBlocking" regex="true">
+            <then>
+                <call blocking="true">
+                    <endpoint>
+                        <http method="GET"
+                              uri-template="{uri.var.apiUrl}/search/companies?q={uri.var.searchTerm}{+uri.var.urlParamString}"/>
+                    </endpoint>
+                </call>
+            </then>
+            <else>
+                <call>
+                    <endpoint>
+                        <http method="GET"
+                              uri-template="{uri.var.apiUrl}/search/companies?q={uri.var.searchTerm}{+uri.var.urlParamString}"/>
+                    </endpoint>
+                </call>
+            </else>
+        </filter>
     </sequence>
 </template>
