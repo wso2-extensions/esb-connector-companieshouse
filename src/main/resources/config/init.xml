@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- ~  Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ ~  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  ~
  ~  WSO2 Inc. licenses this file to you under the Apache License,
  ~  Version 2.0 (the "License"); you may not use this file except
@@ -23,13 +23,14 @@
     <sequence>
         <property name="uri.var.apiUrl" expression="$func:apiUrl"/>
         <property name="uri.var.apiKey" expression="$func:apiKey"/>
+        <property name="companieshouseBlocking" expression="$func:blocking"/>
         <filter source="boolean(get-property('uri.var.apiUrl'))" regex="false">
             <then>
-                <property name="uri.var.apiUrl" value="api.companieshouse.gov.uk"/>
+                <property name="uri.var.apiUrl" value="http://api.companieshouse.gov.uk"/>
             </then>
         </filter>
         <header name="Authorization"
-                expression="fn:concat('Basic ',base64Encode(get-property('uri.var.apiKey')))"
+                expression="fn:concat('Basic ', base64Encode(get-property('uri.var.apiKey')))"
                 scope="transport"/>
     </sequence>
 </template>
