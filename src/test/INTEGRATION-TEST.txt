@@ -15,6 +15,7 @@ Tested Platform:
 Steps to follow in setting integration test.
 
  1. Download and place the wso2ei-6.3.0.zip and file in to location "<COMPANIESHOUSE_HOME>/repository/".
+    If you need to add the certificate to keystores, extract the certificate from browser(Mozilla Firefox) by navigating to Companieshouse account url and place it to {EI_Connector_Home}/repositiry/.
 
  2. Create companieshouse account with https://account.companieshouse.gov.uk/.
     To obtain an API key, go to Your applications and register the application with the Companies House Developer Hub
