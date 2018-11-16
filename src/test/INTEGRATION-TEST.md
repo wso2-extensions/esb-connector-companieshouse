@@ -1,17 +1,18 @@
-Product: Integration tests for WSO2 ESB Companies House connector
+## Integration tests for WSO2 EI Companies House connector
 
-Pre-requisites:
+### Pre-requisites:
 
  - Maven 3.x
  - Java 1.8
  - The org.wso2.esb.integration.integration-base project is required. The test suite has been configured to download this project automatically. If the automatic download fails, download the following project and compile it using the mvn clean install command to update your local repository:
    https://github.com/wso2-extensions/esb-integration-base
 
-Tested Platform: 
+### Tested Platform: 
 
  - UBUNTU 16.04
  - WSO2 EI 6.4.0
-
+ - Java 1.8
+ 
 Steps to follow in setting integration test.
 
  1. Download and place the wso2ei-6.4.0.zip and file in to location "<COMPANIESHOUSE_HOME>/repository/".
@@ -23,10 +24,10 @@ Steps to follow in setting integration test.
 
  3. Update the companieshouse properties file at location "<COMPANIESHOUSE_HOME>/src/test/resources/artifacts/ESB/connector/config" as below.
 	
-	01) apiUrl                      - Endpoint URL of the API. Use http://api.companieshouse.gov.uk
-	02) apiKey                      - API Key obtained via 3.
+	    i)  apiUrl         - Endpoint URL of the API. Use http://api.companieshouse.gov.uk
+	    ii) apiKey         - API Key obtained via 2.
 
- 4. Navigate to "<COMPANIESHOUSE_HOME>/" and run the following command.
-      $ mvn clean install -Dskip-tests=false
+ 4. Navigate to "<COMPANIESHOUSE_HOME>/" and run the following command.<br/>
+      ```$ mvn clean install -Dskip-tests=false```
 
 		
