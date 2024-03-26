@@ -1,0 +1,12 @@
+{
+    "name": "Companies House",
+    "owner": "WSO2",
+    "category": "Other",
+    "documentationUrl": "https://docs.wso2.com/display/ESBCONNECTORS/Companies+House+Connector",
+    "description": "The Companies House connector allows you to access the Companies House REST API through WSO2 ESB. The Companies House API lets you retrieve information about limited companies (and other companies that fall within the Companies Act 2006). The data returned is live and realÃ‚Â­time, and is simple to use and understand.",
+    "status": "Active",
+    "labels": [
+        "Other"
+    ],
+    "releases": []
+}
